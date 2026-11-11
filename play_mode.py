@@ -46,9 +46,10 @@ def resume():
 
 
 def finish():
-    global boy
+    global boy, sparrows
     game_world.clear()
     boy = None
+    sparrows = []
 
 
 def update():
@@ -58,7 +59,6 @@ def render():
     clear_canvas()
     game_world.render()
     update_canvas()
-
 
 
 
