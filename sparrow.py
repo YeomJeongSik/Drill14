@@ -63,6 +63,7 @@ class Sparrow:
             states=['IDLE', 'FLY'],
             transitions=[
                 {'trigger': 'start_flying', 'source': 'IDLE', 'dest': 'FLY'},
+                {'trigger': 'reset_flight', 'source': 'FLY', 'dest': 'IDLE'},
             ],
             initial='IDLE',
             auto_transitions=False,
@@ -92,6 +93,17 @@ class Sparrow:
         self.y = self.base_y + FLIGHT_AMPLITUDE * sin(
             self.phase + FLIGHT_FREQUENCY * self.flight_time
         )
+
+    def update(self):
+        self.states[self.state].do(self)
+        if self.x - DRAW_WIDTH / 2 > get_canvas_width():
+            self.respawn()
+
+    def respawn(self):
+        self.x = -DRAW_WIDTH / 2
+        self.flight_time = 0.0
+        self.phase += tau / 7.0
+        self.reset_flight()
 
     def draw(self):
         frame = int(self.frame)
