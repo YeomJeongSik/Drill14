@@ -3,8 +3,10 @@ import game_world
 import game_framework
 from boy import Boy
 from grass import Grass
+from sparrow import Sparrow
 
 boy = None
+sparrows = []
 
 
 def handle_events():
@@ -52,7 +54,6 @@ def render():
     clear_canvas()
     game_world.render()
     update_canvas()
-
 
 
 
