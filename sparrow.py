@@ -19,6 +19,8 @@ SPRITE_ROWS = 3
 SPRITE_FRAME_COUNT = 14
 DRAW_WIDTH = 110
 DRAW_HEIGHT = 101
+ANIMATION_FPS = 12.0
+SPRITE_TOP_OFFSET = 2
 
 
 class Idle:
@@ -66,3 +68,17 @@ class Sparrow:
 
     def on_enter_FLY(self):
         self.states['FLY'].enter(self)
+
+    def advance_frame(self):
+        self.frame = (self.frame + ANIMATION_FPS *
+                      game_framework.frame_time) % SPRITE_FRAME_COUNT
+
+    def draw(self):
+        frame = int(self.frame)
+        row, column = divmod(frame, SPRITE_COLUMNS)
+        source_x = column * SPRITE_WIDTH
+        source_y = (SPRITE_ROWS - row - 1) * SPRITE_HEIGHT + SPRITE_TOP_OFFSET
+        self.image.clip_draw(
+            source_x, source_y, SPRITE_WIDTH, SPRITE_HEIGHT,
+            self.x, self.y, DRAW_WIDTH, DRAW_HEIGHT
+        )
