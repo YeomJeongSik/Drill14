@@ -24,10 +24,14 @@ def handle_events():
 
 
 def init():
-    global boy
+    global boy, sparrows
 
     boy = Boy()
     game_world.add_oject(boy)
+
+    sparrows = [Sparrow(index) for index in range(10)]
+    for sparrow in sparrows:
+        game_world.add_oject(sparrow)
 
     grass = Grass()
     game_world.add_oject(grass, 0)
@@ -54,7 +58,6 @@ def render():
     clear_canvas()
     game_world.render()
     update_canvas()
-
 
 
 
