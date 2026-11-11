@@ -21,6 +21,8 @@ DRAW_WIDTH = 110
 DRAW_HEIGHT = 101
 ANIMATION_FPS = 12.0
 SPRITE_TOP_OFFSET = 2
+FLIGHT_AMPLITUDE = 32.0
+FLIGHT_FREQUENCY = tau / 3.2
 
 
 class Idle:
@@ -52,6 +54,9 @@ class Sparrow:
         self.x = 0.0
         self.y = 0.0
         self.phase = 0.0
+        self.base_y = 0.0
+        self.flight_time = 0.0
+        self.configure_initial_position()
         self.states = {'IDLE': Idle(), 'FLY': Fly()}
         self.machine = Machine(
             model=self,
@@ -72,6 +77,21 @@ class Sparrow:
     def advance_frame(self):
         self.frame = (self.frame + ANIMATION_FPS *
                       game_framework.frame_time) % SPRITE_FRAME_COUNT
+
+    def configure_initial_position(self):
+        spacing = get_canvas_width() / 10.0
+        self.x = -DRAW_WIDTH / 2 + self.index * spacing
+        self.base_y = get_canvas_height() * 0.45 + (self.index % 3) * 55
+        self.y = self.base_y
+        self.phase = self.index * tau / 10.0
+
+    def move(self):
+        frame_time = game_framework.frame_time
+        self.flight_time += frame_time
+        self.x += BIRD_SPEED_PPS * frame_time
+        self.y = self.base_y + FLIGHT_AMPLITUDE * sin(
+            self.phase + FLIGHT_FREQUENCY * self.flight_time
+        )
 
     def draw(self):
         frame = int(self.frame)
