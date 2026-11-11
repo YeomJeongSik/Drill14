@@ -269,30 +269,39 @@ y = base_y + amplitude * sin(phase + frequency * flight_time)
 
 각 단계는 가능하면 하나의 독립 커밋으로 남긴다.
 
-1. `docs: add sparrow flight animation PRD`
+1. `문서: 참새 비행 애니메이션 PRD 작성`
    - 요구사항과 검증 기준 문서화
-2. `chore: track baseline game assets and modules`
+2. `기초: 기준 게임 파일과 리소스 등록`
    - 기준 코드와 리소스 등록
-3. `feat: define sparrow physics and sprite constants`
+3. `기능: 참새 물리 상수와 스프라이트 규격 정의`
    - 물리량과 시트 규격 정의
-4. `feat: add sparrow idle and flight states`
+4. `기능: 참새 대기 및 비행 상태 추가`
    - 상태 클래스 및 transition 정의
-5. `feat: render sparrow sprite sheet frames`
+5. `기능: 참새 스프라이트 시트 프레임 렌더링`
    - 프레임 좌표 계산 및 렌더링
-6. `feat: move sparrows with frame independent physics`
+6. `기능: 프레임 독립적인 참새 물리 이동 구현`
    - 수평 속도와 수직 궤적 구현
-7. `feat: respawn sparrows after leaving right wall`
+7. `기능: 오른쪽 벽 이탈 후 참새 재생성 구현`
    - 이탈 판정 및 재스폰
-8. `feat: register sparrow collection in play mode`
+8. `기능: 플레이 모드에 참새 목록 연결`
    - 게임 모드 목록 연결
-9. `feat: spawn ten sparrows in the game world`
+9. `기능: 게임 월드에 참새 10마리 생성`
    - 10마리 생성 및 레이어 등록
-10. `fix: clear sparrow references on mode finish`
+10. `수정: 모드 종료 시 참새 참조 정리`
     - 모드 종료 정리
-11. `perf: share sparrow sprite image across instances`
+11. `성능: 참새 인스턴스 간 스프라이트 이미지 공유`
     - 이미지 리소스 캐시
 
 추가 수정이 발생하면 기존 커밋을 수정하지 않고 새로운 목적의 커밋으로 남긴다.
+
+### 8.1 커밋 작성 규칙
+
+- 커밋 제목과 본문은 모두 한국어로 작성한다.
+- 커밋 제목은 변경 목적이 드러나는 짧은 문장으로 작성한다.
+- 커밋 본문에는 변경한 기술 요소와 변경 이유를 기록한다.
+- 하나의 커밋에는 하나의 기술적 목적만 포함한다.
+- 기능 구현 커밋과 문서 커밋을 구분해 실제 코드 변화와 제목이 일치하도록 한다.
+- 최종 제출 시에는 제출 커밋을 별도로 만들고 전체 구현 논리를 본문에 요약한다.
 
 ## 9. 완료 기준
 
@@ -309,3 +318,4 @@ y = base_y + amplitude * sin(phase + frequency * flight_time)
 - [ ] 정적 문법 검증이 성공한다.
 - [ ] 작업 트리가 불필요한 생성 파일 없이 깨끗하다.
 - [ ] 구현 과정의 기술적 커밋이 10개 이상이다.
+- [ ] 구현 관련 커밋의 제목과 본문이 모두 한국어다.
