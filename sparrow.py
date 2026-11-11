@@ -46,9 +46,13 @@ class Fly:
 
 
 class Sparrow:
+    image = None
+
     def __init__(self, index):
         self.index = index
-        self.image = load_image('bird_animation.png')
+        if Sparrow.image is None:
+            Sparrow.image = load_image('bird_animation.png')
+        self.image = Sparrow.image
         self.frame = 0
         self.idle_started_at = get_time()
         self.x = 0.0
